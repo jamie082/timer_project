@@ -1,3 +1,4 @@
+from re import I
 import tkinter as tk
 from tkinter.ttk import Label
 from tkinter import messagebox
@@ -21,26 +22,49 @@ second.set("00")
 # prog link: http://geeksforgeeks.org/create-countdown-timer-using-python-tkinter/?ref=lbp
 # Entry widget
 
-secondEntry = Entry(root_window, width = 3, textvariable=second)
-secondEntry.place(x=180, y=20)
-
 # label
 
 label = Label(root_window, text="Enter seconds")
 label.place(relx = 1.0, rely = 0.0, anchor = 'ne')
 
+dict_new = {
+    "second": 00
+}
+
+# x = car.get("model")
+
+secondEntry = Entry(root_window, width = 3, textvariable=second)
+secondEntry.place(x=180, y=20)
 
 def menu_submit():
     # the input from the user is stored here
     try:
+        temp = int(second.get())
 
     except ValueError:
-        print("Please :input a value that is a int")
+        print("Please input a value that is a int")
         sys.exit()
 
+    while temp >-1: 
 
-    while temp >-1:
+        mins, secs = divmod(temp, 60)
 
+        # store second value
+        second.set("{0:2d}".format(secs))
+        
+        dict_new.get('second')
+
+        # update GUI window after decrementing the 
+        # temp value every time
+        root.update()
+        time.sleep(1)
+
+        if (temp == 0):
+            messagebox.showinfo("Time Countdown", "Time's up ")
+
+        # after every one sec the value of temp will be devremented
+        # by one
+        temp -= 1
 
 # Button #1
 btn = Button(root_window, text = "Start Timer", command = messagebox.showinfo)
